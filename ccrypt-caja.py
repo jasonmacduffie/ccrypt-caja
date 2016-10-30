@@ -41,6 +41,15 @@ def call_ccdecrypt(filename):
     decrypt_process.wait()
 
     # Check if all went well
+    if prompt_process.returncode != 0:
+        zenity_error_process = subprocess.Popen([
+            'zenity',
+            '--error',
+            '--title="Decryption Key"',
+            '--text="The operation was aborted."'
+        ])
+        return 'Aborted'
+
     if decrypt_process.returncode != 0:
         zenity_error_process = subprocess.Popen([
             'zenity',
@@ -75,9 +84,28 @@ def call_ccencrypt(filename):
     ]
     prompt1_proc = subprocess.Popen(zenity_prompt1, stdout=subprocess.PIPE)
     prompt1_output = prompt1_proc.communicate()[0]
+    # Check if the prompt was cancelled
+    if prompt1_proc.returncode != 0:
+        zenity_error_process = subprocess.Popen([
+            'zenity',
+            '--error',
+            '--title="Encryption Key"',
+            '--text="The operation was aborted."'
+        ])
+        return 'Aborted'
     prompt2_proc = subprocess.Popen(zenity_prompt2, stdout=subprocess.PIPE)
     prompt2_output = prompt2_proc.communicate()[0]
+    # Check if the prompt was cancelled
+    if prompt2_proc.returncode != 0:
+        zenity_error_process = subprocess.Popen([
+            'zenity',
+            '--error',
+            '--title="Encryption Key"',
+            '--text="The operation was aborted."'
+        ])
+        return 'Aborted'
 
+    # Check the passwords match
     if prompt1_output != prompt2_output:
         mismatch_notify = subprocess.Popen([
             'zenity',
