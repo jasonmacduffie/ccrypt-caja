@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # Written by Jason K. MacDuffie
 # Encrypt files with ccrypt in Caja
 import os
@@ -6,8 +9,20 @@ import urllib
 import subprocess
 
 from gi.repository import Caja, GObject, Gio
+from locale import getlocale
 
 CCRYPT_SCHEMA = 'org.mate.applications-ccrypt'
+
+# No clue what the right way to do locales is, so this is my best attempt
+loc = getlocale()[0]
+encrypt_loc = {
+    'en': 'Encrypt',
+    'eo': 'Ĉifri'
+}
+decrypt_loc = {
+    'en': 'Decrypt',
+    'eo': 'Deĉifri'
+}
 
 def call_ccdecrypt(filename):
     zenity_prompt = [
@@ -112,7 +127,7 @@ class CCryptExtension(Caja.MenuProvider, GObject.GObject):
             return
 
         encryption_item = Caja.MenuItem(name='CajaPython::ccencrypt_file_item',
-                                        label='Encrypt...',
+                                        label=encrypt_loc[loc] + '...',
                                         tip='Encrypt this file using ccencrypt')
 
         encryption_item.connect('activate', self.menu_activate_encryption, file)
@@ -125,7 +140,7 @@ class CCryptExtension(Caja.MenuProvider, GObject.GObject):
 
         # Otherwise, include a decryption option
         decryption_item = Caja.MenuItem(name='CajaPython::ccdecrypt_file_item',
-                                        label='Decrypt...',
+                                        label=decrypt_loc[loc] + '...',
                                         tip='Decrypt this file using ccdecrypt')
 
         decryption_item.connect('activate', self.menu_activate_decryption, file)
