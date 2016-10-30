@@ -30,7 +30,9 @@ def call_ccdecrypt(filename):
         '--entry',
         '--hide-text',
         '--title="Decryption Key"',
-        '--text="Enter a key for ccdecrypt:"'
+        '--text="Enter a key for ccdecrypt:"',
+        '--width=240',
+        '--height=150'
     ]
     prompt_process = subprocess.Popen(zenity_prompt, stdout=subprocess.PIPE)
     decrypt_process = subprocess.Popen(['ccdecrypt', '-k', '-', filename],
@@ -57,14 +59,19 @@ def call_ccencrypt(filename):
         '--entry',
         '--hide-text',
         '--title="Encryption Key"',
-        '--text="Enter a key for ccencrypt:"'
+        '--text="Enter a key for ccencrypt:"',
+        '--width=240',
+        '--height=150'
+
     ]
     zenity_prompt2 = [
         'zenity',
         '--entry',
         '--hide-text',
         '--title="Encryption key"',
-        '--text="Enter the same key again to confirm:"'
+        '--text="Enter the same key again to confirm:"',
+        '--width=240',
+        '--height=150'
     ]
     prompt1_proc = subprocess.Popen(zenity_prompt1, stdout=subprocess.PIPE)
     prompt1_output = prompt1_proc.communicate()[0]
