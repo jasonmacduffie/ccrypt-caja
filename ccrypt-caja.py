@@ -29,8 +29,8 @@ def call_ccdecrypt(filename):
         'zenity',
         '--entry',
         '--hide-text',
-        '--title="Decryption Key"',
-        '--text="Enter a key for ccdecrypt:"',
+        '--title=Decryption Key',
+        '--text=Enter a key for ccdecrypt:',
         '--width=240',
         '--height=150'
     ]
@@ -45,8 +45,8 @@ def call_ccdecrypt(filename):
         zenity_error_process = subprocess.Popen([
             'zenity',
             '--error',
-            '--title="Decryption Key"',
-            '--text="The operation was aborted."'
+            '--title=Decryption Key',
+            '--text=The operation was aborted.'
         ])
         return 'Aborted'
 
@@ -54,8 +54,8 @@ def call_ccdecrypt(filename):
         zenity_error_process = subprocess.Popen([
             'zenity',
             '--error',
-            '--title="Decryption Key"',
-            '--text="Decryption failed. The entered key may have been incorrect."'
+            '--title=Decryption Key',
+            '--text=Decryption failed. The entered key may have been incorrect.'
         ])
 
         return 'Failure'
@@ -67,8 +67,8 @@ def call_ccencrypt(filename):
         'zenity',
         '--entry',
         '--hide-text',
-        '--title="Encryption Key"',
-        '--text="Enter a key for ccencrypt:"',
+        '--title=Encryption Key',
+        '--text=Enter a key for ccencrypt:',
         '--width=240',
         '--height=150'
 
@@ -77,8 +77,8 @@ def call_ccencrypt(filename):
         'zenity',
         '--entry',
         '--hide-text',
-        '--title="Encryption key"',
-        '--text="Enter the same key again to confirm:"',
+        '--title=Encryption key',
+        '--text=Enter the same key again to confirm:',
         '--width=240',
         '--height=150'
     ]
@@ -89,8 +89,8 @@ def call_ccencrypt(filename):
         zenity_error_process = subprocess.Popen([
             'zenity',
             '--error',
-            '--title="Encryption Key"',
-            '--text="The operation was aborted."'
+            '--title=Encryption Key',
+            '--text=The operation was aborted.'
         ])
         return 'Aborted'
     prompt2_proc = subprocess.Popen(zenity_prompt2, stdout=subprocess.PIPE)
@@ -100,8 +100,8 @@ def call_ccencrypt(filename):
         zenity_error_process = subprocess.Popen([
             'zenity',
             '--error',
-            '--title="Encryption Key"',
-            '--text="The operation was aborted."'
+            '--title=Encryption Key',
+            '--text=The operation was aborted.'
         ])
         return 'Aborted'
 
@@ -110,8 +110,8 @@ def call_ccencrypt(filename):
         mismatch_notify = subprocess.Popen([
             'zenity',
             '--error',
-            '--title="Encryption Key',
-            '--text="The encryption keys did not match."'
+            '--title=Encryption Key',
+            '--text=The encryption keys did not match.'
         ])
 
         return 'Failure'
@@ -125,8 +125,8 @@ def call_ccencrypt(filename):
         zenity_error_process = subprocess.Popen([
             'zenity',
             '--error',
-            '--title="Encryption Key"',
-            '--text="Encryption failed for some reason."'
+            '--title=Encryption Key',
+            '--text=Encryption failed for some reason.'
         ])
         
         return 'Failure'
